@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Home Page'),
     );
   }
 }
@@ -50,9 +50,25 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Color colorValue = Colors.white;
+  List<Color> colorsValueList = [
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white,
+    Colors.white
+  ];
 
   void _changeColor() {
     Color newColor = Color(Random().nextInt(0xffffffff));
+    List<Color> newColorsList = [];
+
+    for(int i = 0; i < colorsValueList.length; i++){
+      newColorsList.add(Color(Random().nextInt(0xffffffff)));
+    }
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -60,6 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       colorValue = newColor;
+
+      for(int i = 0; i < colorsValueList.length; i++){
+        colorsValueList[i] = newColorsList[i];
+      }
     });
   }
 
@@ -76,7 +96,26 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        centerTitle: true,
+        title: RichText(
+          text: TextSpan(
+            text: 'M',
+            style: TextStyle(
+              fontSize: 30,
+              color: colorsValueList[0],
+            ),
+            children: <TextSpan>[
+              TextSpan(text: 'y', style: TextStyle(color: colorsValueList[1])),
+              TextSpan(text: ' c', style: TextStyle(color: colorsValueList[2])),
+              TextSpan(text: 'o', style: TextStyle(color: colorsValueList[3])),
+              TextSpan(text: 'o', style: TextStyle(color: colorsValueList[4])),
+              TextSpan(text: 'l', style: TextStyle(color: colorsValueList[5])),
+              TextSpan(text: ' a', style: TextStyle(color: colorsValueList[6])),
+              TextSpan(text: 'p', style: TextStyle(color: colorsValueList[7])),
+              TextSpan(text: 'p', style: TextStyle(color: colorsValueList[8])),
+            ],
+          ),
+        ),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
