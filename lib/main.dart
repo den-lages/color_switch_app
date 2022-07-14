@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
+
+import 'package:flutter/material.dart';
+
+// cntrl + alt + L
+// cntrl + alt + O
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +17,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         primarySwatch: Colors.blueGrey,
       ),
       home: const MyHomePage(title: 'My cool App'),
@@ -37,60 +40,75 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    colorsValueList = List.generate(widget.title.length,
-            (index) => Colors.white);
+    colorsValueList = _generateListOfRandomColors(color: Colors.white);
   }
 
-  _generateRandomColor() => (Color(Random().nextInt(0xffffffff)));
+  Color get _generateRandomColor => Color(Random().nextInt(0xffffffff));
+
+  List<Color> _generateListOfRandomColors({Color? color}) => List.generate(
+        widget.title.length,
+        (index) => color ?? _generateRandomColor,
+      );
 
   void _changeColor() {
-    Color newColor = _generateRandomColor();
-    List<Color> newColorsList = List.generate(widget.title.length,
-            (index) => _generateRandomColor());
+    Color newColor = _generateRandomColor;
+    List<Color> newColorsList = _generateListOfRandomColors();
 
     setState(() {
       colorValue = newColor;
-
-      for(int i = 0; i < colorsValueList.length; i++){
-        colorsValueList[i] = newColorsList[i];
-      }
+      colorsValueList = newColorsList;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: colorValue,
       appBar: AppBar(
-
         centerTitle: true,
         title: RichText(
           text: TextSpan(
-            text: widget.title[0],
-            style: TextStyle(
-              fontSize: 30,
-              color: colorsValueList[0],
-            ),
+            style: const TextStyle(fontSize: 30),
             children: <TextSpan>[
-              TextSpan(text: widget.title[1], style: TextStyle(color: colorsValueList[1])),
-              TextSpan(text: widget.title[2], style: TextStyle(color: colorsValueList[2])),
-              TextSpan(text: widget.title[3], style: TextStyle(color: colorsValueList[3])),
-              TextSpan(text: widget.title[4], style: TextStyle(color: colorsValueList[4])),
-              TextSpan(text: widget.title[5], style: TextStyle(color: colorsValueList[5])),
-              TextSpan(text: widget.title[6], style: TextStyle(color: colorsValueList[6])),
-              TextSpan(text: widget.title[7], style: TextStyle(color: colorsValueList[7])),
-              TextSpan(text: widget.title[8], style: TextStyle(color: colorsValueList[8])),
-              TextSpan(text: widget.title[9], style: TextStyle(color: colorsValueList[9])),
-              TextSpan(text: widget.title[10], style: TextStyle(color: colorsValueList[10])),
+              TextSpan(
+                  text: widget.title[0],
+                  style: TextStyle(color: colorsValueList[0])),
+              TextSpan(
+                  text: widget.title[1],
+                  style: TextStyle(color: colorsValueList[1])),
+              TextSpan(
+                  text: widget.title[2],
+                  style: TextStyle(color: colorsValueList[2])),
+              TextSpan(
+                  text: widget.title[3],
+                  style: TextStyle(color: colorsValueList[3])),
+              TextSpan(
+                  text: widget.title[4],
+                  style: TextStyle(color: colorsValueList[4])),
+              TextSpan(
+                  text: widget.title[5],
+                  style: TextStyle(color: colorsValueList[5])),
+              TextSpan(
+                  text: widget.title[6],
+                  style: TextStyle(color: colorsValueList[6])),
+              TextSpan(
+                  text: widget.title[7],
+                  style: TextStyle(color: colorsValueList[7])),
+              TextSpan(
+                  text: widget.title[8],
+                  style: TextStyle(color: colorsValueList[8])),
+              TextSpan(
+                  text: widget.title[9],
+                  style: TextStyle(color: colorsValueList[9])),
+              TextSpan(
+                  text: widget.title[10],
+                  style: TextStyle(color: colorsValueList[10])),
             ],
           ),
         ),
       ),
       body: Center(
-
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
@@ -105,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontSize: 40,
                 color: Colors.grey,
               ),
-           ),
+            ),
           ],
         ),
       ),
