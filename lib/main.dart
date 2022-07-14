@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -43,10 +41,12 @@ class _MyHomePageState extends State<MyHomePage> {
             (index) => Colors.white);
   }
 
+  _generateRandomColor() => (Color(Random().nextInt(0xffffffff)));
+
   void _changeColor() {
-    Color newColor = Color(Random().nextInt(0xffffffff)); // move to separate method generating random color
+    Color newColor = _generateRandomColor();
     List<Color> newColorsList = List.generate(widget.title.length,
-            (index) => Color(Random().nextInt(0xffffffff))); // move to separate method generating random color
+            (index) => _generateRandomColor());
 
     setState(() {
       colorValue = newColor;
