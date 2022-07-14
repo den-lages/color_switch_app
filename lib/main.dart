@@ -33,16 +33,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static const int titleLenght = 11; // ???
-
   Color colorValue = Colors.white;
-  List<Color> colorsValueList = List.generate(titleLenght,
-          (index) => Colors.white);
+  late List<Color> colorsValueList;
+
+  @override
+  void initState() {
+    super.initState();
+    colorsValueList = List.generate(widget.title.length,
+            (index) => Colors.white);
+  }
 
   void _changeColor() {
-    Color newColor = Color(Random().nextInt(0xffffffff));
+    Color newColor = Color(Random().nextInt(0xffffffff)); // move to separate method generating random color
     List<Color> newColorsList = List.generate(widget.title.length,
-            (index) => Color(Random().nextInt(0xffffffff)));
+            (index) => Color(Random().nextInt(0xffffffff))); // move to separate method generating random color
 
     setState(() {
       colorValue = newColor;
@@ -97,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$colorValue',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 40,
                 color: Colors.grey,
               ),
